@@ -1,29 +1,20 @@
 ﻿/* 
 ==============================================================================================
 DirectPngSave@ToyBox
-Last Update:2018/09/11
+Last Update:2018/09/12
 https://github.com/yukichi0306/
-
-必要と想定される例外処理------------------------------------------
-（実装済）pathEggが無い場合に警告（18/09/11）
-（実装済）pathEggに該当するものが２以上ある場合、警告(18/09/11)
-・layListかpathEggのどちらかがいらないんじゃ…？
-・指定先のフォルダが無い場合に警告
 ==============================================================================================
 */
 var docObj = activeDocument;
-var layList = [];
 var pathEgg = [];   //保存先候補
-var filePath;
 
 for (i = 0; i <docObj.layers.length; i++)
 {
-    layList[i] = docObj.layers[i].name;
-    if(layList[i].indexOf('++') !== -1)
+    if(docObj.layers[i].name.indexOf('++') !== -1)
     {
         for(j = 0;j <= i; j++)
         {
-        pathEgg[j] = layList[i];
+        pathEgg[j] = docObj.layers[i].name;
         }
     }
 }
@@ -44,14 +35,23 @@ else if(pathEgg.length > 1)
 //画像を保存する====================================================================
 function DirectPngSave()
 {
-filePath = pathEgg[0].replace('++', '');
-
-//PngSave========================================================================
+var filePath = pathEgg[0].replace('++', '');
+var num = filePath.lastIndexOf ('\\');
+var folderPath = filePath.slice(0,num+1);
+var folderJudge = new Folder(folderPath);
+var flag = folderJudge.exists;
+//PngSave=======================================================
+if(flag == true)
+{
 pngFile = new File(filePath);//パス指定とファイル名
 pngOpt = new PNGSaveOptions();
 pngOpt.interlaced = false;
 activeDocument.saveAs(pngFile, pngOpt, true, Extension.LOWERCASE);  
-//===============================================================================
-
 alert('Finish');
 }
+else if(flag == false)
+{
+    alert("保存先に指定されたフォルダが存在しません。");
+    }
+}
+//===============================================================================
