@@ -3,6 +3,9 @@
 DirectPngSave@ToyBox
 Last Update:2018/09/12
 https://github.com/yukichi0306/
+
+++バグ情報＋＋
+ファイルパスを記したレイヤーがグループの中にあった場合、pathEgg.length == 0　が実行される。
 ==============================================================================================
 */
 var docObj = activeDocument;
