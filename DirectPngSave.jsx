@@ -1,26 +1,41 @@
 ﻿/* 
 ==============================================================================================
 DirectPngSave@ToyBox
-Last Update:2018/09/12
+Last Update:2018/11/14
 https://github.com/yukichi0306/
-
-++バグ情報＋＋
-ファイルパスを記したレイヤーがグループの中にあった場合、pathEgg.length == 0　が実行される。
 ==============================================================================================
 */
 var docObj = activeDocument;
 var pathEgg = [];   //保存先候補
+var layName = [];   //レイヤー名
 
-for (i = 0; i <docObj.layers.length; i++)
+//レイヤー名を配列に
+for (i = 0; i < docObj.layers.length; i++)
 {
-    if(docObj.layers[i].name.indexOf('++') !== -1)
-    {
-        for(j = 0;j <= i; j++)
+    layName[i] = docObj.layers[i].name;
+}
+
+//レイヤーセット内のレイヤー名を配列に
+for(i = 0; i < docObj.layerSets.length; i++)
+{
+        for (j = 0; j < docObj.layerSets[i].artLayers.length; j++)
         {
-        pathEgg[j] = docObj.layers[i].name;
+            var n = docObj.layerSets[i].artLayers[j].name;
+            layName.push(n);
         }
+}
+
+//保存先候補となるレイヤー名の検索
+for (i = 0,j = 0; i < layName.length; i++)
+{
+if(layName[i].indexOf('++') !== -1)
+    {
+        pathEgg[j] = layName[i];
+        j++;
     }
 }
+
+//保存実行分岐
 if(pathEgg.length == 0)
 {
     alert("保存先を示したレイヤーが見つかりません。");
@@ -33,8 +48,7 @@ else if(pathEgg.length > 1)
 {
     alert("保存先を示したレイヤーが２つ以上あります。");
     }
-
-
+ 
 //画像を保存する====================================================================
 function DirectPngSave()
 {
