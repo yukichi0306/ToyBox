@@ -22,5 +22,13 @@ DirectPngSaveのTGAバージョン。仕様も同じ。
 TGAで保存するというだけの違い。完全自分用。  
 ***
 
+### DirectPngTgaSave.jsx
+++（保存画像絶対パス）  
+DirectPngSaveとDirectTgaSaveを合わせたバージョン。仕様は基本同じ。  
+パスの拡張子を判断してPngかTgaで保存します。完全自分用。  
+バグチェックをあまり行っていないので、バグがあるかもしれません。  
+ToyBoxから脱出する日が来るかも？
+***
+
 ### LayersInfo.jsx
 各レイヤーの名前と、レイヤーごとのピクセルがある範囲[left,top,right,bottom]をテキストに書き出す、スクリプト。
