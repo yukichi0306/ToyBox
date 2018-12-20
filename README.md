@@ -23,11 +23,8 @@ TGAで保存するというだけの違い。完全自分用。
 ***
 
 ### DirectPngTgaSave.jsx
-++（保存画像絶対パス）  
-DirectPngSaveとDirectTgaSaveを合わせたバージョン。仕様は基本同じ。  
-パスの拡張子を判断してPngかTgaで保存します。完全自分用。  
-バグチェックをあまり行っていないので、バグがあるかもしれません。  
-ToyBoxから脱出する日が来るかも？
+DirectSaveAs.jsxと名前を変更後、DirecSaveAsに移行  
+ToyBoxから脱出しました。
 ***
 
 ### LayersInfo.jsx
